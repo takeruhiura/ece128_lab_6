@@ -20,23 +20,20 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module sr_flip_tb();
-    reg s,r,clk;
-    wire q,qbar;
-    
-    sr_flip dut(.Q(q), .Qbar(qbar), .S(s), .R(r), .clk(clk));
-    
-    initial begin
-        clk=0;
-        forever #10 clk=~clk;
-    end
-    
-    initial begin
-        s=1;r=0;
-        #10 s=0;r=1;
-        #10 r=0;
-        #10 s=1;r=1;
-        #10 r=0; s=0;
-        $stop;
-        end
+module sr_tb;
+reg S,R, CLK;
+wire Q, QBAR;
+srff dut(.q(Q), .qbar(QBAR), .s(S), .r(R), .clk(CLK)); // instantiation by
+port name.
+// apply test vectors
+initial begin
+ clk=0;
+ forever #10 clk = ~clk;
+end
+initial begin
+S= 1; R= 0;
+#100; S= 0; R= 1;
+#100; S= 0; R= 0;
+#100; S= 1; R=1;
+end
 endmodule
