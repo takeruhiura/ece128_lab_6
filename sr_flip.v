@@ -38,3 +38,4 @@ module sr_flip(Q, Qbar, S, R, clk);
         endcase
     end
 endmodule
+
