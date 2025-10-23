@@ -21,15 +21,20 @@
 
 
 
-module sr_flip(Q,Qbar,S,R,clk);
-    output Q, Qbar;
-    input S,R,clk;
-    
-    wire out1, out2;
-    
-    and A1(out1, R, clk);
-    and A2(out2, S, clk);
-    nor N1(Q, out1, Qbar);
-    nor N2(Qbar, out2, Q);
-
-     endmodule
+module sr_flip(Q, Qbar, S, R, clk);
+    output reg Q;
+    output Qbar;
+    input S, R, clk;
+   
+    assign Qbar = ~Q;
+   
+    always @(posedge clk) begin
+        case ({S, R})
+            2'b00: Q <= Q;      
+            2'b01: Q <= 1'b0;    
+            2'b10: Q <= 1'b1;  
+            2'b11: Q <= 1'bx;    
+            default : Q <= Q;
+        endcase
+    end
+endmodule
