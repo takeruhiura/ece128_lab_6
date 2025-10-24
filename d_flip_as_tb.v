@@ -21,26 +21,24 @@
 
 
 module d_flip_as_tb;
-    reg clk;
-    reg d;
-    reg rstn;
-    reg [2:0] delay;
+    reg d, clk, rstn;
+    wire q;
     
-    d_flip_as dff0(.d(d), .rstn(rstn), .clk(clk), .q(q));
+    d_flip_as dut(.d(d), .clk(clk), .rstn(rstn), .q(q));
     
-    always #10 clk=~clk;
-    
-    integer i;
     initial begin
-        clk<=0;
-        d<=0;
-        rstn<=0;
+        clk = 0;
+        forever #10 clk = ~clk;
+    end
+    
+    initial begin
+        rstn = 0; d = 0;
+        #100 rstn = 0; d = 1;
+        #100 rstn = 1; d = 0;
+        #100 rstn = 1; d = 1;
+        #100 rstn = 0;
         
-        #15 d<=1;
-        #10 rstn<=1;
-        for(i=0;i<5;i=i+1) begin
-            delay=$random;
-            #(delay) d<=i;
-        end
+        #100;
+        $finish;
     end
 endmodule
