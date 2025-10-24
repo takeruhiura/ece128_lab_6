@@ -19,8 +19,6 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
-
 module sr_flip(Q, Qbar, S, R, clk);
     output reg Q;
     output Qbar;
@@ -30,22 +28,11 @@ module sr_flip(Q, Qbar, S, R, clk);
    
     always @(posedge clk) begin
         case ({S, R})
-            2'b00: begin
-                Q <= Q;
-                Qbar <= ~Q;
-            end
-            2'b01: begin
-                Q <= 1'b0;
-                Qbar <= 1'b1;
-            end
-            2'b10: begin
-                Q <= 1'b1;
-                Qbar <= 1'b0;
-            end
-            2'b11: begin
-                Q <= 1'b0;    
-                Qbar <= 1'b0;  
-            end
+            2'b00: Q <= Q;      
+            2'b01: Q <= 1'b0;    
+            2'b10: Q <= 1'b1;  
+            2'b11: Q <= 1'bx;    
+            default : Q <= Q;
         endcase
     end
 endmodule
