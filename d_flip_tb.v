@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-//this is for syncrhonous d flip flop
+//this is for synchronous d flip flop
 
 module d_flip_tb;
     reg d, clk, rstn;
