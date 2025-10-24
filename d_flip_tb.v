@@ -20,11 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module d_flip_as_tb;
+module d_flip_tb;
     reg d, clk, rstn;
     wire q;
     
-    d_flip_as dut(.d(d), .clk(clk), .rstn(rstn), .q(q));
+    d_flip_s dut(.d(d), .clk(clk), .rstn(rstn), .q(q));
     
     initial begin
         clk = 0;
